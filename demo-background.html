@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title></title>
+	<!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+	    .banner {
+			position: relative;
+			margin-top: -1px;
+			height:641px;
+			overflow:hidden;
+		}
+		.banner .d1 {
+			width:100%;
+			height:641px;
+			display:block;
+			position:absolute;
+			left:0px;
+			top:0px;
+		}
+		.banner .d2 {
+			width:100%;
+			height:30px;
+			clear:both;
+			position:absolute;
+			z-index:100;
+			left:0px;
+			bottom:0;
+			background-color: #d3b272;
+			filter:alpha(opacity=80); 
+			-moz-opacity:0.8; 
+			opacity:0.8;
+		}
+		.banner .d2 ul {
+			float:left;
+			position:absolute;
+			bottom: -15px;
+			display:inline;
+		}
+		.banner .d2 li {
+			width:15px;
+			height:25px;
+			overflow:hidden;
+			cursor:pointer;
+			background:url(img/bg-ico.png) -5px -25px no-repeat;
+			float:left;
+			margin:0 5px;
+			display:inline;
+		}
+		.banner .d2 li.nuw {
+			background:url(img/bg-ico.png) -5px 0px no-repeat;
+		}
+
+    </style>
+</head>
+<body>
+<div class="banner" id="banner" >
+  <a href="" class="d1" style="background:url(img/banner1.jpg) center no-repeat;"></a>
+  <a href="" class="d1" style="background:url(img/banner2.jpg) center no-repeat;"></a>
+  <a href="" class="d1" style="background:url(img/banner3.jpg) center no-repeat;"></a>
+  <a href="" class="d1" style="background:url(img/banner4.jpg) center no-repeat;"></a>
+  <div class="d2" id="banner_id">
+    <ul>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+  </div>
+</div>
+<script src="js/jquery.1.10.2.js"></script>
+<script type="text/javascript">
+    function banner(){  
+      var bn_id = 0;
+      var bn_id2= 1;
+      var speed33=5000;
+      var qhjg = 1;
+        var MyMar33;
+      $("#banner .d1").hide();
+      $("#banner .d1").eq(0).fadeIn("slow");
+      if($("#banner .d1").length>1)
+      {
+        $("#banner_id li").eq(0).addClass("nuw");
+        function Marquee33(){
+          bn_id2 = bn_id+1;
+          if(bn_id2>$("#banner .d1").length-1)
+          {
+            bn_id2 = 0;
+          }
+          $("#banner .d1").eq(bn_id).css("z-index","2");
+          $("#banner .d1").eq(bn_id2).css("z-index","1");
+          $("#banner .d1").eq(bn_id2).show();
+          $("#banner .d1").eq(bn_id).fadeOut("slow");
+          $("#banner_id li").removeClass("nuw");
+          $("#banner_id li").eq(bn_id2).addClass("nuw");
+          bn_id=bn_id2;
+        };
+      
+        MyMar33=setInterval(Marquee33,speed33);
+        
+        $("#banner_id li").click(function(){
+          var bn_id3 = $("#banner_id li").index(this);
+          if(bn_id3!=bn_id&&qhjg==1)
+          {
+            qhjg = 0;
+            $("#banner .d1").eq(bn_id).css("z-index","2");
+            $("#banner .d1").eq(bn_id3).css("z-index","1");
+            $("#banner .d1").eq(bn_id3).show();
+            $("#banner .d1").eq(bn_id).fadeOut("slow",function(){qhjg = 1;});
+            $("#banner_id li").removeClass("nuw");
+            $("#banner_id li").eq(bn_id3).addClass("nuw");
+            bn_id=bn_id3;
+          }
+        })
+        $("#banner_id").hover(
+          function(){
+            clearInterval(MyMar33);
+          }
+          ,
+          function(){
+            MyMar33=setInterval(Marquee33,speed33);
+          }
+        ) 
+      }
+      else
+      {
+        $("#banner_id").hide();
+      }
+    }
+    banner();
+
+</script>
+</body>
+</html>
